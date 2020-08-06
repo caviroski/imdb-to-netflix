@@ -1,4 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:args/args.dart';
+
+ArgResults argResults;
 
 void main(List<String> arguments) {
   exitCode = 0; // presume success
@@ -6,6 +11,8 @@ void main(List<String> arguments) {
 
   argResults = parser.parse(arguments);
   final paths = argResults.rest;
+
+  readFile(paths);
 }
 
 Future readFile(List<String> paths) async {
@@ -25,5 +32,13 @@ Future readFile(List<String> paths) async {
         await _handleError(path);
       }
     }
+  }
+}
+
+Future _handleError(String path) async {
+  if (await FileSystemEntity.isDirectory(path)) {
+    stderr.writeln('error: $path is a directory');
+  } else {
+    exitCode = 2;
   }
 }
