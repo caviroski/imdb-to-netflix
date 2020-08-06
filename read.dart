@@ -33,9 +33,8 @@ Future readFile(List<String> paths) async {
             getTitlePosition(line);
             isFirstLine = false;
           } else {
-            // bbb(line);
+            getTitle(line);
           }
-          // stdout.writeln(line);
         }
       } catch (_) {
         await _handleError(path);
@@ -49,8 +48,10 @@ getTitlePosition(String line) {
   titlePosition = titleElements.indexOf('Title');
 }
 
-bbb(String line) {
-  print('line bbb = $line');
+getTitle(String line) {
+  var lineElements = line.split(',');
+  var ttt = lineElements.elementAt(titlePosition);
+  stdout.writeln(ttt);
 }
 
 Future _handleError(String path) async {
