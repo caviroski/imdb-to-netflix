@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:args/args.dart';
 
 ArgResults argResults;
+bool isFirstLine = true;
+int titlePosition = 0;
 
 void main(List<String> arguments) {
   exitCode = 0; // presume success
@@ -24,15 +26,31 @@ Future readFile(List<String> paths) async {
       final lines = utf8.decoder
           .bind(File(path).openRead())
           .transform(const LineSplitter());
+      // print('lines = ${await lines.length}');
       try {
         await for (var line in lines) {
-          stdout.writeln(line);
+          if (isFirstLine) {
+            getTitlePosition(line);
+            isFirstLine = false;
+          } else {
+            // bbb(line);
+          }
+          // stdout.writeln(line);
         }
       } catch (_) {
         await _handleError(path);
       }
     }
   }
+}
+
+getTitlePosition(String line) {
+  var titleElements = line.split(',');
+  titlePosition = titleElements.indexOf('Title');
+}
+
+bbb(String line) {
+  print('line bbb = $line');
 }
 
 Future _handleError(String path) async {
