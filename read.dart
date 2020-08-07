@@ -6,6 +6,7 @@ import 'package:args/args.dart';
 ArgResults argResults;
 bool isFirstLine = true;
 int titlePosition = 0;
+List titleLinks = [];
 
 void main(List<String> arguments) {
   exitCode = 0; // presume success
@@ -36,6 +37,7 @@ Future readFile(List<String> paths) async {
             getTitle(line);
           }
         }
+        print('titleLinks = $titleLinks');
       } catch (_) {
         await _handleError(path);
       }
@@ -50,8 +52,13 @@ getTitlePosition(String line) {
 
 getTitle(String line) {
   var lineElements = line.split(',');
-  var ttt = lineElements.elementAt(titlePosition);
-  stdout.writeln(ttt);
+  var title = lineElements.elementAt(titlePosition);
+  creteLink(title);
+}
+
+creteLink(String title) {
+  titleLinks.add('https://www.netflix.com/search?q=$title');
+  // stdout.writeln(ttt);
 }
 
 Future _handleError(String path) async {
