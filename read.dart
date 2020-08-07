@@ -6,18 +6,7 @@ import 'package:args/args.dart';
 ArgResults argResults;
 bool isFirstLine = true;
 int titlePosition = 0;
-List titleLinks = [];
-class Title {
-  String name;
-  String link;
-
-  Title(this.name, this.link);
-
-  @override
-  String toString() {
-    return '{ ${this.name}, ${this.link} }';
-  }
-}
+List titleLinks = <Map>[];
 
 void main(List<String> arguments) {
   exitCode = 0; // presume success
@@ -38,7 +27,6 @@ Future readFile(List<String> paths) async {
       final lines = utf8.decoder
           .bind(File(path).openRead())
           .transform(const LineSplitter());
-      // print('lines = ${await lines.length}');
       try {
         await for (var line in lines) {
           if (isFirstLine) {
@@ -60,7 +48,7 @@ Future writeFile() async {
   final file = File('output/netflix-search.html');
   await file.writeAsString('', mode: FileMode.write);
   for (var obj in titleLinks) {
-    var fullLink = '<a href="https://www.netflix.com/search?q=${obj.link}" target="_blank">${obj.name}</a><br>';
+    var fullLink = '<a href="${obj['link']}" target="_blank">${obj['name']}</a><br>';
     await file.writeAsString(fullLink, mode: FileMode.append);
   }
 }
@@ -91,7 +79,10 @@ getTitleConatainingComa(String line, String title) {
 
 creteLink(String title) {
   var uri = Uri.encodeQueryComponent(title);
-  titleLinks.add(new Title(title, 'https://www.netflix.com/search?q=$uri'));
+  var map = {};
+  map['name'] = title;
+  map['link'] = 'https://www.netflix.com/search?q=$uri';
+  titleLinks.add(map);
 }
 
 Future _handleError(String path) async {
