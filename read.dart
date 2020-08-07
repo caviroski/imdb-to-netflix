@@ -37,11 +37,21 @@ Future readFile(List<String> paths) async {
             getTitle(line);
           }
         }
-        print('titleLinks = $titleLinks');
+        // print('titleLinks = $titleLinks');
+        writeFile();
       } catch (_) {
         await _handleError(path);
       }
     }
+  }
+}
+
+Future writeFile() async {
+  final file = File('aaa.html');
+  await file.writeAsString('', mode: FileMode.write);
+  for (var link in titleLinks) {
+    var fullLink = '<a href="https://www.netflix.com/search?q=$link">$link</a><br>';
+    await file.writeAsString(fullLink, mode: FileMode.append);
   }
 }
 
