@@ -7,6 +7,17 @@ ArgResults argResults;
 bool isFirstLine = true;
 int titlePosition = 0;
 List titleLinks = [];
+class Title {
+  String name;
+  String link;
+
+  Title(this.name, this.link);
+
+  @override
+  String toString() {
+    return '{ ${this.name}, ${this.link} }';
+  }
+}
 
 void main(List<String> arguments) {
   exitCode = 0; // presume success
@@ -37,7 +48,6 @@ Future readFile(List<String> paths) async {
             getTitle(line);
           }
         }
-        // print('titleLinks = $titleLinks');
         writeFile();
       } catch (_) {
         await _handleError(path);
@@ -50,7 +60,7 @@ Future writeFile() async {
   final file = File('output/netflix-search.html');
   await file.writeAsString('', mode: FileMode.write);
   for (var link in titleLinks) {
-    var fullLink = '<a href="https://www.netflix.com/search?q=$link">$link</a><br>';
+    var fullLink = '<a href="https://www.netflix.com/search?q=${link.link}">${link.name}</a><br>';
     await file.writeAsString(fullLink, mode: FileMode.append);
   }
 }
@@ -68,7 +78,7 @@ getTitle(String line) {
 
 creteLink(String title) {
   var uriTitle = Uri.encodeQueryComponent(title);
-  titleLinks.add('https://www.netflix.com/search?q=$uriTitle');
+  titleLinks.add(new Title(title, 'https://www.netflix.com/search?q=$uriTitle'));
 }
 
 Future _handleError(String path) async {
