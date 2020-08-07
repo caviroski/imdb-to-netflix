@@ -57,8 +57,8 @@ getTitle(String line) {
 }
 
 creteLink(String title) {
-  titleLinks.add('https://www.netflix.com/search?q=$title');
-  // stdout.writeln(ttt);
+  var uriTitle = Uri.encodeQueryComponent(title);
+  titleLinks.add('https://www.netflix.com/search?q=$uriTitle');
 }
 
 Future _handleError(String path) async {
