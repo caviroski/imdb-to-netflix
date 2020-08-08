@@ -3,7 +3,6 @@
 # Dart project
 .dart_tool
 .packages
-pubspec.lock
 
 # Files
 input/aaa.csv
