@@ -1,4 +1,4 @@
-name: read
+name: imdb_to_netflix
 
 environment:
   sdk: '>=2.6.0 <3.0.0'
