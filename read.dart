@@ -48,7 +48,7 @@ Future writeFile() async {
   final file = File('output/netflix-search.html');
   await file.writeAsString('', mode: FileMode.write);
   for (var obj in titleLinks) {
-    var fullLink = '<a href="${obj['link']}" target="_blank">${obj['name']}</a><br>';
+    var fullLink = '<a href="${obj['link']}" target="_blank">${obj['name']}</a><br>\n';
     await file.writeAsString(fullLink, mode: FileMode.append);
   }
 }
@@ -79,10 +79,10 @@ getTitleConatainingComa(String line, String title) {
 
 creteLink(String title) {
   var uri = Uri.encodeQueryComponent(title);
-  var map = {};
-  map['name'] = title;
-  map['link'] = 'https://www.netflix.com/search?q=$uri';
-  titleLinks.add(map);
+  var titleMap = new Map();
+  titleMap['name'] = title;
+  titleMap['link'] = 'https://www.netflix.com/search?q=$uri';
+  titleLinks.add(titleMap);
 }
 
 Future _handleError(String path) async {
