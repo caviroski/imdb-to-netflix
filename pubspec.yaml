@@ -1,5 +1,5 @@
 name: imdb_to_netflix
-version: 1.0.0
+version: 1.0.1
 author: Igor Caviroski
 description: Convert imdb watchlist to html for Netflix search
 repository: https://github.com/caviroski/imdb-to-netflix
