@@ -45,7 +45,7 @@ Future readFile(List<String> paths) async {
 }
 
 Future writeFile() async {
-  final file = File('output/netflix-search.html');
+  final file = File('assets/output/netflix-search.html');
   await file.writeAsString('', mode: FileMode.write);
   for (var obj in titleLinks) {
     var fullLink = '<a href="${obj['link']}" target="_blank">${obj['name']}</a><br>\n';

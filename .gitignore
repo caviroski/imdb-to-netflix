@@ -5,6 +5,4 @@
 .packages
 
 # Files
-input/aaa.csv
-input/bbb.csv
-input/original.csv
+assets/input/original.csv
