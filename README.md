@@ -7,4 +7,4 @@
 imdb.csv --> your csv file from imdb watchlist that you can export
 
 In the command line 
-....imdb-to-netflix> dart read.dart imdb.csv
+....imdb-to-netflix\bin> dart imdb_to_netflix.dart ..\assets\input\imdb.csv
