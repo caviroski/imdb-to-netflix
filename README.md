@@ -11,4 +11,4 @@ In the command line
 
 # Compile a Dart program to native x64 machine code
 
-...imdb-to-netflix\bin> dart2native .\imdb_to_netflix.dart -o imdb_to_netflix.exe
+...imdb-to-netflix\bin> dart2native imdb_to_netflix.dart -o imdb_to_netflix.exe
