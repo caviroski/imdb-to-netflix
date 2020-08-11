@@ -6,6 +6,7 @@ import 'package:imdb_to_netflix/read.dart';
 ArgResults argResults;
 
 void main(List<String> arguments) {
+
   exitCode = 0; // presume success
   final parser = ArgParser();
 
@@ -14,4 +15,5 @@ void main(List<String> arguments) {
 
   var read = new Read(); 
   read.readFile(paths);
+  
 }

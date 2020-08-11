@@ -12,8 +12,7 @@ class Read {
 
   Future readFile(List<String> paths) async {
     if (paths.isEmpty) {
-      // No files provided as arguments. Read from stdin and print each line.
-      await stdin.pipe(stdout);
+      stderr.writeln('error: please provide file');
     } else {
       for (var path in paths) {
         final lines = utf8.decoder
@@ -29,6 +28,7 @@ class Read {
             }
           }
           write.writeFile(process.titleLinks);
+          stderr.writeln('success: the html file is created');
         } catch (_) {
           await _handleError(path);
         }
