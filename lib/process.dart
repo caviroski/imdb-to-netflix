@@ -9,22 +9,9 @@ class Process {
   }
 
   getTitle(String line) {
-    var lineElements = line.split(',');
+    var lineElements = line.split(new RegExp(r',(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)'));
     var title = lineElements.elementAt(titlePosition);
-    if (title[0] == '"') {
-      getTitleConatainingComa(line, title);
-    } else {
-      creteLink(title);
-    }
-  }
-
-  getTitleConatainingComa(String line, String title) {
-    var startIndex = line.indexOf(title);
-    var inBetweenTitle = line.substring(startIndex);
-    inBetweenTitle = inBetweenTitle.replaceFirst('"', '');
-    var endIndex = inBetweenTitle.indexOf('"');
-    var newTitle = inBetweenTitle.substring(0, endIndex);
-    creteLink(newTitle);
+    creteLink(title);
   }
 
   creteLink(String title) {
