@@ -11,6 +11,7 @@ class Process {
   getTitle(String line) {
     var lineElements = line.split(new RegExp(r',(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)'));
     var title = lineElements.elementAt(titlePosition);
+    title = title.replaceAll(new RegExp(r'^\"|\"$'), '');
     creteLink(title);
   }
 
