@@ -7,7 +7,7 @@ ArgResults argResults;
 
 void main(List<String> arguments) {
 
-  exitCode = 0; // presume success
+  exitCode = 0; // presume success yes
   final parser = ArgParser();
 
   argResults = parser.parse(arguments);
